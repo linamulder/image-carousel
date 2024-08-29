@@ -1,0 +1,87 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.carousel {
+  width: 100vw;
+  height: 100vh;
+  /* Setting the position relative because I'm going to position absolute the buttons inside of it. Use position relative when you want to slightly move an element from it's original position or if you want to move it's children in position absolute. */
+  position: relative;
+}
+
+/* Unordered lists naturally have padding added onto it so you need to remove it */
+.carousel > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.slide {
+  position: absolute;
+  /* The inset property sets the distance between an element and the parent element.  */
+  inset: 0;
+  opacity: 0;
+  /* set it to ease-in-out for a smooth transition */
+  transition: 200ms opacity ease-in-out;
+  /* set the slides to have a delay so the current slide can stick around longer for better transition */
+  transition-delay: 200ms;
+}
+
+/* Selects all <img> elements where the parent is a .side element  */
+.slide > img {
+  /* Set the display to block so I can resize it */
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Object fit is going ot make it so that the image is going to fill the screen & the aspect ratio is maintained */
+  object-fit: cover;
+  object-position: center;
+}
+
+.slide[data-active] {
+  opacity: 1;
+  /* You must put the ms after the number otherwise it won't work */
+  transition-delay: 0ms;
+  /* set the z index above the other slides so the current slide always show */
+  z-index: 1;
+}
+
+.carousel-button {
+  position: absolute;
+  background: none;
+  border: none;
+  font-size: 4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: 0.25rem;
+  padding: 0 0.5rem;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+/* This is for accessibility */
+.carousel-button:hover,
+.carousel-button:focus {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* This helps people who don't have mouses and rely on tabs */
+.carousel-button:focus {
+  outline: 1px solid black;
+}
+
+.carousel-button.prev {
+  left: 1rem;
+}
+
+.carousel-button.next {
+  right: 1rem;
+}
