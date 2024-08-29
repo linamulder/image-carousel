@@ -23,6 +23,7 @@ buttons.forEach((button) => {
       newIndex = 0;
     }
 
+    // This is to add the new dataset to the current active element
     slides.children[newIndex].dataset.active = true;
     delete activeSlide.dataset.active;
   });
